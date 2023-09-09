@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>Daily Photos</title>
+
+<script type="text/javascript">
+// <![CDATA[
+var dailyPhotos;
+var today, img;
+
+dailyPhotos = function() {
+
+   today = new Date();
+   weekday = today.getDay();
+   showImages = [ ];
+   myPhotos = [ "Sunday.png", "Monday.png", "Tuesday.png", "wednesdayPhoto.jpg", "thursday.png", "Friday.png", "Saturday.png" ]; // You must specify the path or file name of your images that will be loaded in a weekday basis.
+
+    if ( document.images ) {
+       for ( var x = 0; x < myPhotos.length; x++ ) { 
+       showImages[ x ] = new Image();
+       showImages[ x ].src = myPhotos[ x ];          
+     } img = (( document.getElementById ) ? document.getElementById("yourImageId") : document.images.yourImageId ); // Specify the id of the image that will get raplaced daily.
+        img.src = showImages[ weekday ].src;
+        img.alt = myPhotos[ weekday ];         
+   } return false; // If the browser can't display images, then EXIT FUNCTION.
+};
+   window.onload = dailyPhotos;
+// ]]>
+</script>
+</head>
+<body>
+<div id="main">
+<img id="yourImageId" src="tuesdayPhoto.jpg" alt="DEMO" />
+</div>
+</body>
+</html>
